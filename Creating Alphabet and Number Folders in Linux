@@ -1,0 +1,15 @@
+mkdir {a..z} {A..Z} {0..9}
+for dir in {a..z} {A..Z} {0..9}; do
+mv $dir* $dir 2>/dev/null
+done
+for dir in {A..Z}; do
+if [ -d "$dir" ]; then
+lower_dir="${dir,,}"
+if [ -d "$lower_dir" ]; then
+mv "$dir"/* "$lower_dir"/
+rmdir "$dir"
+else
+mv "$dir" "$lower_dir"
+fi
+fi
+done
